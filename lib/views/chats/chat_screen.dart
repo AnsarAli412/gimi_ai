@@ -6,6 +6,7 @@ import 'package:gem_ai/views/chats/widgets/chat_widgets.dart';
 import 'package:gem_ai/views/speeches/speech_screen.dart';
 import 'package:gem_ai/views/utils/extensions/int_extensions.dart';
 import 'package:gem_ai/views/utils/extensions/widget_extensions.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -16,10 +17,6 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  var userRole = "user";
-  var modelRole = "model";
-
-  var chats = <Content>[];
   var gemini = Gemini.instance;
   var messageController = TextEditingController();
   bool isFieldEnable = false;
@@ -31,36 +28,41 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: view.appBatView(),
       body: Column(
         children: [
-          Consumer<SpeechProvider>(builder: (BuildContext context, value, Widget? child) {
-            value.initSpeech();
-            return Text(value.searchMessage);
-          },),
-          Consumer<ChatProvider>(builder: (BuildContext context, value, Widget? child) {
-            return value.messages.isNotEmpty
-                ? ListView.separated(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 10, vertical: 10),
-              itemCount: value.messages.length,
-              itemBuilder: (c, index) {
-                // return Markdown(data: chats[index].parts?.lastOrNull?.text??"");
-                return Card(
-                  child: view.chatItemView(
-                    value.messages[index],
-                  ),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return 10.height;
-              },
-            ).expanded()
-                : view.noMessageView().center().expanded();
-          },),
+          Consumer<SpeechProvider>(
+            builder: (BuildContext context, value, Widget? child) {
+              value.initSpeech();
+              return Text(value.searchMessage);
+            },
+          ),
+          Consumer<ChatProvider>(
+            builder: (BuildContext context, value, Widget? child) {
+              return value.messages.isNotEmpty
+                  ? ListView.separated(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                      itemCount: value.messages.reversed.length,
+                      itemBuilder: (c, index) {
+                        return Card(
+                          child: view.chatItemView(
+                            value.messages[index],
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return 10.height;
+                      },
+                    ).expanded()
+                  : view.noMessageView().center().expanded();
+            },
+          ),
           GeminiResponseTypeView(
             builder: (BuildContext context, Widget? child, String? response,
                 bool loading) {
               if (loading) {
-                return Text("Loading...");
+                return LoadingAnimationWidget.waveDots(
+                    color: Colors.blueAccent, size: 40);
               } else {
+                messageController.clear();
                 return Container();
               }
             },

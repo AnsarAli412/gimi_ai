@@ -3,10 +3,8 @@ import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:gem_ai/controllers/chat_provider.dart';
 import 'package:gem_ai/controllers/speech_provider.dart';
 import 'package:gem_ai/views/chats/chat_screen.dart';
-import 'package:gem_ai/views/test_screen.dart';
+import 'package:gem_ai/views/utils/keys.dart';
 import 'package:provider/provider.dart';
-
-const gemKey = "AIzaSyCvL0VSENonrQ0LdGluPvsyQ8bZP23vkJ4";
 
 void main() {
   runApp(MultiProvider(
@@ -16,7 +14,7 @@ void main() {
     ],
     child: const MyApp(),
   ));
-  Gemini.init(apiKey: gemKey, enableDebugging: true);
+  Gemini.init(apiKey: geminiKey, enableDebugging: true);
 }
 
 class MyApp extends StatelessWidget {

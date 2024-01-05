@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../models/message_data_model.dart';
 
 class ChatProvider with ChangeNotifier {
-  bool _hasMessage = false;
 
+  bool _hasMessage = false;
   bool get hasMessage => _hasMessage;
 
   set setMessageEnabled(bool value) {
@@ -13,7 +13,6 @@ class ChatProvider with ChangeNotifier {
   }
 
   String _searchMessage = "";
-
   String get searchMessage => _searchMessage;
 
   set searchSetMessage(String searchText) {
@@ -29,7 +28,9 @@ class ChatProvider with ChangeNotifier {
   List<MessageDataModel> _messages = <MessageDataModel>[];
 
   List<MessageDataModel> get messages => _messages;
-  Future<List<MessageDataModel>> setChatMessage(List<MessageDataModel> currentMessage) async {
+
+  Future<List<MessageDataModel>> setChatMessage(
+      List<MessageDataModel> currentMessage) async {
     _messages.addAll(currentMessage);
     notifyListeners();
     return _messages;

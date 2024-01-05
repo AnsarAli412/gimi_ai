@@ -13,7 +13,7 @@ class ChatWidgets {
   ChatWidgets({required this.context});
 
   AppBar appBatView() => AppBar(
-        title: const Text("Chat AI"),
+        title: const Text("Gimi AI"),
       );
 
   Widget chatItemView(MessageDataModel data) {

@@ -40,8 +40,8 @@ dependencies:
   speech_to_text: any
   provider: any
   fluttertoast: ^8.2.4
-  flutter_markdown: ^0.6.18+2
   flutter_widget_from_html: ^0.14.9
+  loading_animation_widget: ^1.2.0+4
 #  flutter_html: any
 
 dev_dependencies:

@@ -28,7 +28,7 @@ class _SpeechScreenState extends State<SpeechScreen> {
                 child: IconButton(
                     onPressed: () {
                       var searchMessage = chatProvider.searchMessage;
-                      searchMessageRequest(searchMessage);
+                      responseMessages(searchMessage);
                     },
                     icon: const Icon(
                       // size: 30,
@@ -75,13 +75,14 @@ class _SpeechScreenState extends State<SpeechScreen> {
     final List<MessageDataModel> currentMessage = <MessageDataModel>[];
     var gemini = Gemini.instance;
     if (message != "" || message.isNotEmpty) {
-      var data = Content(role: "user", parts: [Parts(text: message)]);
+      // var data = Content(role: "user", parts: [Parts(text: message)]);
+      gemini.streamGenerateContent(message).listen((event) {
+        currentMessage.add(
+            MessageDataModel(request: message, response: event.output));
+        Provider.of<ChatProvider>(context, listen: false)
+            .setChatMessage(currentMessage);
+      });
     }
-    gemini.streamGenerateContent(message).listen((event) {
-      currentMessage.add(
-          MessageDataModel(request: message, response: event.output));
-      Provider.of<ChatProvider>(context, listen: false)
-          .setChatMessage(currentMessage);
-    });
+
   }
 }
