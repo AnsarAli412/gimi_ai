@@ -20,12 +20,19 @@ class ChatWidgets {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          data.request ?? "",
-          style: const TextStyle(fontWeight: FontWeight.w900),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              data.request ?? "",
+              style: const TextStyle(fontWeight: FontWeight.w900),
+            ),
+            // Icon(Icons.volume_up)
+            IconButton(onPressed: (){}, icon: Icon(Icons.volume_up))
+          ],
         ),
-        5.height,
-        HtmlWidget(data.response ?? "")
+        HtmlWidget(data.response ?? "").flexible(),
       ],
     ).paddingAll(10);
   }

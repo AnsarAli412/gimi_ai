@@ -15,11 +15,6 @@ class ChatProvider with ChangeNotifier {
   String _searchMessage = "";
   String get searchMessage => _searchMessage;
 
-  set searchSetMessage(String searchText) {
-    _searchMessage = searchText;
-    notifyListeners();
-  }
-
   set setMessage(String searchText) {
     _searchMessage = searchText;
     notifyListeners();

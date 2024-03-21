@@ -38,6 +38,7 @@ dependencies:
   flutter_gemini: ^2.0.0
   intl: any
   speech_to_text: any
+  flutter_tts: ^3.8.5
   provider: any
   fluttertoast: ^8.2.4
   flutter_widget_from_html: ^0.14.9

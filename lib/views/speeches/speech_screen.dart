@@ -31,7 +31,6 @@ class _SpeechScreenState extends State<SpeechScreen> {
                       responseMessages(searchMessage);
                     },
                     icon: const Icon(
-                      // size: 30,
                       Icons.send_outlined,
                       color: Colors.white,
                     )),
