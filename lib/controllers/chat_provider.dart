@@ -20,7 +20,7 @@ class ChatProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  List<MessageDataModel> _messages = <MessageDataModel>[];
+  final List<MessageDataModel> _messages = <MessageDataModel>[];
 
   List<MessageDataModel> get messages => _messages;
 
